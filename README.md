@@ -31,6 +31,14 @@ Indicative size saved by functions:
 | lineFuncDouble   | 484      | 4525     | 89.3%         |
 | mulLine          | 580      | 8799     | 93.41%        |
 
+## How I wrote the code
+
+https://gist.github.com/frenchfrog42/3cc0f669d5bb9e02fcb6ef9d075709c0
+
+## How I tested it
+
+Todo
+
 ## Instruction to run
 
 Todo
