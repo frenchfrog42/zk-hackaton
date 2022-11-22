@@ -1,0 +1,56 @@
+import "bn256.scrypt";
+import "bn256pairing.scrypt";
+
+/*
+    List of functions to test:
+    bn256:
+    static function OLDmulFQ12(FQ12 a, FQ12 b) : FQ12
+    static function OLDsquareFQ12(FQ12 a) : FQ12
+    static function OLDdoubleCurvePoint(CurvePoint a) : CurvePoint
+    static function OLDaddCurvePoints(CurvePoint a, CurvePoint b) : CurvePoint
+
+    bn256pairing:
+    static function OLDlineFuncAdd(TwistPoint r, TwistPoint p, CurvePoint q, FQ2 r2) : LineFuncRes
+    static function OLDlineFuncDouble(TwistPoint r, CurvePoint q) : LineFuncRes
+    static function OLDmulLine(FQ12 ret, FQ2 a, FQ2 b, FQ2 c) : FQ12
+*/
+
+contract TestEverything {
+
+    /* BN256 */
+
+    public function testMulFQ12(FQ12 a, FQ12 b) {
+        require(BN256.modFQ12(BN256.OLDmulFQ12(a, b)) == BN256.modFQ12(BN256.mulFQ12(a, b)));
+    }
+
+    public function testSquareFQ12(FQ12 a) {
+        require(BN256.modFQ12(BN256.OLDsquareFQ12(a)) == BN256.modFQ12(BN256.squareFQ12(a)));
+    }
+
+    public function testDoubleCurvePoint(CurvePoint a) {
+        require(BN256.modCurvePoint(BN256.OLDdoubleCurvePoint(a)) == BN256.modCurvePoint(BN256.doubleCurvePoint(a)));
+    }
+
+    public function testAddCurvePoints(CurvePoint a, CurvePoint b) {
+        require(BN256.modCurvePoint(BN256.OLDaddCurvePoints(a, b)) == BN256.modCurvePoint(BN256.addCurvePoints(a, b)));
+    }
+
+    /* BN256Pairing */
+
+    public function testLineFuncAdd(TwistPoint r, TwistPoint p, CurvePoint q, FQ2 r2) {
+        LineFuncRes res1 = BN256Pairing.OLDlineFuncAdd(r, p, q, r2);
+        LineFuncRes res2 = BN256Pairing.lineFuncAdd(r, p, q, r2);
+        require(BN256Pairing.modLineFuncRes(res1) == BN256Pairing.modLineFuncRes(res2));
+    }
+
+    public function testLineFuncDouble(TwistPoint r, CurvePoint q) {
+        LineFuncRes res1 = BN256Pairing.OLDlineFuncDouble(r, q);
+        LineFuncRes res2 = BN256Pairing.lineFuncDouble(r, q);
+        require(BN256Pairing.modLineFuncRes(res1) == BN256Pairing.modLineFuncRes(res2));
+    }
+
+    public function testMulLine(FQ12 ret, FQ2 a, FQ2 b, FQ2 c) {
+        require(BN256.modFQ12(BN256Pairing.OLDmulLine(ret, a, b, c)) == BN256.modFQ12(BN256Pairing.mulLine(ret, a, b, c)));
+    }
+    
+}
