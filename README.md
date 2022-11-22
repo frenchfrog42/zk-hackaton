@@ -39,6 +39,8 @@ https://gist.github.com/frenchfrog42/3cc0f669d5bb9e02fcb6ef9d075709c0
 
 Todo
 
+(todo make the random test go under all branches)
+
 ## Instruction to run
 
 Todo
