@@ -31,6 +31,13 @@ Indicative size saved by functions:
 | lineFuncDouble   | 484      | 4525     | 89.3%         |
 | mulLine          | 580      | 8799     | 93.41%        |
 
+(It's only an indicative size, for the "old size" there are some overhead it's not the true size. And the "old size" have the modulus everywhere inside, but not the "new size". I compared properly only mulFQ12 without the modulus everywhere and the gain was approx ~70%)  
+(And it's also with the debug version, not the release version of these functions!)
+
+I mainly rewrote it in Baguette because it's more low level and you have more control (for instance you don't have to copy every arguments on top of the stack each time you make a function call) (todo finir ça)
+
+And I also remove the modulus everywhere, and only kept the minimal amount of them. Unfortunatly it's probably longer (CPU time) to verify now, but the scriptcode is smaller, so 🤷
+
 ## How I wrote the code
 
 https://gist.github.com/frenchfrog42/3cc0f669d5bb9e02fcb6ef9d075709c0
@@ -51,6 +58,7 @@ Before checking it's equal, it applies a modulus because my version doesn't do c
 ## Instruction to run
 
 Clone the Baguette repo: `git clone https://github.com/frenchfrog42/Baguette`  
+Install racket: `sudo apt-get install racket`
 If you want a good dev experience, install the racket vscode extension as described in https://github.com/frenchfrog42/Baguette  
 Modify and run the file you want, for instance: `racket bn256/line.rkt`  
 Copy and paste the result in your scrypt function :)
