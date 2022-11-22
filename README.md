@@ -35,12 +35,22 @@ Indicative size saved by functions:
 
 https://gist.github.com/frenchfrog42/3cc0f669d5bb9e02fcb6ef9d075709c0
 
+todo finish the gist
+
 ## How I tested it
 
-Todo
+First, it passes the main zksnark test that was already available in the boilerplate repo (todo link)
+
+And then, I tested each function against the scrypt function.  
+The file `test_subfunctions.py` does that (sorry for the boilerplate code, it's copilot).  
+It creates (for instance) random instances of FQ12 objects, call the original FQ12mul function and my function on it, and check results are equal (and they are equal).  
+Before checking it's equal, it applies a modulus because my version doesn't do computation modulus the prime used.
 
 (todo make the random test go under all branches)
 
 ## Instruction to run
 
-Todo
+Clone the Baguette repo: `git clone https://github.com/frenchfrog42/Baguette`  
+If you want a good dev experience, install the racket vscode extension as described in https://github.com/frenchfrog42/Baguette  
+Modify and run the file you want, for instance: `racket bn256/line.rkt`  
+Copy and paste the result in your scrypt function :)
