@@ -52,9 +52,7 @@ And it's also with the debug version, not the release version of these functions
 
 ## How I wrote the code
 
-https://gist.github.com/frenchfrog42/3cc0f669d5bb9e02fcb6ef9d075709c0
-
-todo finish the gist
+Github copilot + https://gist.github.com/frenchfrog42/3cc0f669d5bb9e02fcb6ef9d075709c0
 
 ## How I tested it
 
@@ -73,6 +71,8 @@ Then, install the scryptlib python library: `pip install scryptlib`.
 
 Now, you need to compile the file `testSubfunctionsZksnark.scrypt`, and then execute `python3 test_subfunctions.py`. Please adjust the parameter `n_test` at the very top of the python script if you wish to run more tests.
 
+If you want to run the tests without installing everything on your local machine, here is a repl: https://replit.com/@frenchfrog42/zk-hackaton  
+
 ## Instruction to generate the scrypt/script code
 
 Clone the Baguette repo: `git clone https://github.com/frenchfrog42/Baguette`  
@@ -81,10 +81,16 @@ If you want a good dev experience, install the racket vscode extension as descri
 Modify and run the file you want, for instance: `racket bn256/line.rkt`  
 Copy and paste the result in your scrypt function, and compile your scrypt code :)
 
-## Want to test without installing everything?
+If you want to generate the script code without installing everything on your local machine, here is a repl: https://replit.com/@frenchfrog42/bsv-hackaton
 
-Here is my repl: https://replit.com/@frenchfrog42/zk-hackaton  
+## So, if you want to test without installing anything, here is what to do
+
+Either you want to run the tests, either you want to run the racket code to generate the script.
+
+If you want to run the tests:  
+Here is a repl: https://replit.com/@frenchfrog42/zk-hackaton  
 Now, type either `pip install scryptlib; python3 test_ZKSNARK.py` or `pip install scryptlib; python3 test_subfunctions.py` to run the tests.
 
-Or, create a new repl from this git with 1click:
-[![Run on Repl.it](https://replit.com/badge/github/frenchfrog42/zk-hackaton)](https://replit.com/new/github/frenchfrog42/zk-hackaton)
+If you want to run the racket code:
+Here is a repl: https://replit.com/@frenchfrog42/bsv-hackaton
+Now, type for instance `cd Baguette; racket bn256/line.rkt`.
