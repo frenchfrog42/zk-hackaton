@@ -873,7 +873,7 @@ OP_5 OP_ROLL OP_8 OP_PICK OP_MOD OP_ROT OP_8 OP_PICK OP_MOD OP_OVER OP_2 OP_PICK
         // a to 0 : 1 : 0.
 
         CurvePoint res = a;
-        if (a.z != 1) {
+        if (modReduce(a.z, P) != 1) {
             if (a.z == 0) {
                 res = {0, 1, 0, 0};
             } else {
