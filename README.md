@@ -3,6 +3,8 @@
 Compiled testZKSNARK.scrypt successfully, [1270054 bytes]  
 (Instead of 5MB! Use my files to save lot of fees for your users).
 
+If you want to use my code, just replace your `bn256.scrypt` and `bn256pairing.scrypt` files with my files and enjoy the lower size (and faster compilation time) of your contract.
+
 ## Contribution
 
 I optimized the following functions, so that the resulting scriptcode is a lot smaller and the fees cheaper for the end users. The diff between my code and the original code can be read here: https://github.com/frenchfrog42/zk-hackaton/commit/4e8deff409832e641362289719b9332a6cb0e4e5
@@ -73,7 +75,7 @@ Github copilot + https://gist.github.com/frenchfrog42/3cc0f669d5bb9e02fcb6ef9d07
 
 ## How I tested it
 
-First, it passes the main zksnark test that was already available in the boilerplate repo (todo link)
+First, it passes the main zksnark test that was already available in the boilerplate repo.
 
 And then, I tested each function against the scrypt function.  
 The file `test_subfunctions.py` does that (sorry for the boilerplate code, it's copilot).  
@@ -100,7 +102,7 @@ Copy and paste the result in your scrypt function, and compile your scrypt code 
 
 If you want to generate the script code without installing everything on your local machine, here is a repl: https://replit.com/@frenchfrog42/bsv-hackaton
 
-## So, if you want to test without installing anything, here is what to do
+## If you want to try without installing anything, here is what to do
 
 Either you want to run the tests, either you want to run the racket code to generate the script.
 
