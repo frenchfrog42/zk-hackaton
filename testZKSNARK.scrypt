@@ -1,0 +1,9 @@
+import "zksnark.scrypt";
+
+contract ZKSNARKTest {
+
+    public function testVerify(int[ZKSNARK.N] inputs, Proof proof, VerifyingKey vk) {
+        require(ZKSNARK.verify(inputs, proof, vk));
+    }
+
+}
