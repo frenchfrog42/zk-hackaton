@@ -4,7 +4,7 @@ Compiled testZKSNARK.scrypt successfully, [1505512 bytes]
 
 ## Contribution
 
-I optimized the following functions, so that the resulting scriptcode is a lot smaller and the fees cheaper for the end users.
+I optimized the following functions, so that the resulting scriptcode is a lot smaller and the fees cheaper for the end users. The diff between my code and the original code can be read here: https://github.com/frenchfrog42/zk-hackaton/commit/4e8deff409832e641362289719b9332a6cb0e4e5
 
 Here is the list of functions I optimized:
 
@@ -38,6 +38,13 @@ For instance you don't have to copy every arguments on top of the stack each tim
 Another difference, that gives a lot of improvement here, is the fact that Baguette modify the order of variable in the stack when you modify a variable. So modifying a variable has always a fixed cost, and this variable will be at the top of the stack after the modification.
 
 And I also remove the modulus everywhere, and only kept the minimal amount of them. Unfortunatly it's probably longer (CPU time) to verify now, but the scriptcode is smaller, so 🤷
+
+To remove the modulus I used the file `abstract-interpretation.rkt` which takes source code and estimate the maximum value variable can possibly have. So if you do `c=a+b`, the maximum value `c` can have is the sum of the maximum value. It's however a bit tricky because numbers are very large so I do these estimates with their log256. So `a*b` is the easy to estimate, but not `a+b`.  
+This approach is feasible and somewhat "easy" because it's lisp. It's easy to parse source code and compute information about it.  
+The result of this approach is however depressing. In the worst case you NEED to keep a lot of modulus to not cross the 750.000 bytes limit. You can play yourself with the file if you want, but key take aways are:
++ You need a modulus each 3 iteration of the loop in `mulCurvePoint`
++ You need a modulus each 5 instruction of either `linefuncdouble` or `linefuncadd`  
+I applied these in the source code as you can check yourself. Without this script I'd have intuitively put far less modulus, and therefore wrote an incorrect code!
 
 [1]: It's only an indicative size, for the "old size" there are some overhead so it's not the true size.  
 For the "old size" there is the modulus everywhere inside, but not the "new size" (I compared properly only mulFQ12 without the modulus everywhere and the gain was approx ~70%)  
