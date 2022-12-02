@@ -24,7 +24,9 @@ static function lineFuncDouble(TwistPoint r, CurvePoint q) : LineFuncRes
 static function mulLine(FQ12 ret, FQ2 a, FQ2 b, FQ2 c) : FQ12
 ```
 
-And the indicative size[1] I saved for each functions:
+As you can see, it's not a lot of code. This makes it easier to verify my code is equivalent to the old code. To do so I test each function as well as the full contract, please see below.
+
+Here is the indicative size[1] I saved for each functions:
 
 |                  | New size | Old size | % improvement |
 |------------------|----------|----------|---------------|
