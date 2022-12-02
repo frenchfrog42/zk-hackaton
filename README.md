@@ -1,6 +1,6 @@
 # Todo
 
-Compiled testZKSNARK.scrypt successfully, [1505512 bytes]
+Compiled testZKSNARK.scrypt successfully, [1377903 bytes]
 
 ## Contribution
 
@@ -86,5 +86,5 @@ Copy and paste the result in your scrypt function, and compile your scrypt code 
 Here is my repl: https://replit.com/@frenchfrog42/zk-hackaton  
 Now, type either `pip install scryptlib; python3 test_ZKSNARK.py` or `pip install scryptlib; python3 test_subfunctions.py` to run the tests.
 
-Or, create a new repl:
+Or, create a new repl from this git with 1click:
 [![Run on Repl.it](https://replit.com/badge/github/frenchfrog42/zk-hackaton)](https://replit.com/new/github/frenchfrog42/zk-hackaton)
