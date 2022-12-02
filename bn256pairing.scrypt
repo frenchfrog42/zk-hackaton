@@ -11,7 +11,24 @@ struct LineFuncRes {
 
 library BN256Pairing {
 
+    static function modLineFuncRes(LineFuncRes l): LineFuncRes {
+        l.a = BN256.modFQ2(l.a);
+        l.b = BN256.modFQ2(l.b);
+        l.c = BN256.modFQ2(l.c);
+        l.rOut.x = BN256.modFQ2(l.rOut.x);
+        l.rOut.y = BN256.modFQ2(l.rOut.y);
+        l.rOut.z = BN256.modFQ2(l.rOut.z);
+        l.rOut.t = BN256.modFQ2(l.rOut.t);
+        return l;
+    }
+
     static function lineFuncAdd(TwistPoint r, TwistPoint p, CurvePoint q, FQ2 r2) : LineFuncRes {
+        asm {
+OP_13 OP_PICK OP_15 OP_PICK OP_MUL OP_16 OP_PICK OP_14 OP_PICK OP_MUL OP_ADD OP_13 OP_PICK OP_16 OP_PICK OP_MUL OP_15 OP_PICK 12 OP_PICK OP_MUL OP_SUB OP_13 OP_PICK 14 OP_PICK OP_ADD OP_13 OP_PICK 14 OP_PICK OP_ADD OP_DUP OP_2 OP_PICK OP_SUB OP_2 OP_PICK OP_2 OP_PICK OP_ADD OP_2 OP_4 OP_ROLL OP_4 OP_ROLL OP_MUL OP_MUL OP_SWAP OP_ROT OP_MUL OP_SWAP OP_5 OP_PICK OP_SUB OP_SWAP OP_4 OP_PICK OP_SUB OP_SWAP 13 OP_PICK OP_SUB OP_SWAP 12 OP_PICK OP_SUB 12 OP_PICK 14 OP_PICK OP_3 OP_ROLL OP_DUP OP_3 OP_PICK OP_MUL OP_2 OP_PICK OP_5 OP_PICK OP_MUL OP_ADD OP_SWAP OP_ROT OP_MUL OP_3 OP_ROLL OP_3 OP_ROLL OP_MUL OP_SWAP OP_SUB OP_3 OP_ROLL 19 OP_PICK OP_SUB OP_3 OP_ROLL 18 OP_PICK OP_SUB OP_2DUP OP_DUP OP_2 OP_PICK OP_SUB OP_2 OP_PICK OP_2 OP_PICK OP_ADD OP_2 OP_4 OP_ROLL OP_4 OP_ROLL OP_MUL OP_MUL OP_SWAP OP_ROT OP_MUL OP_OVER OP_2 OP_PICK OP_ADD OP_OVER OP_2 OP_PICK OP_ADD OP_OVER OP_ROT OP_ADD OP_OVER OP_ROT OP_ADD OP_4 OP_PICK OP_OVER OP_3 OP_PICK OP_8 OP_PICK OP_DUP OP_3 OP_PICK OP_MUL OP_2 OP_PICK OP_5 OP_PICK OP_MUL OP_ADD OP_SWAP OP_ROT OP_MUL OP_3 OP_ROLL OP_3 OP_ROLL OP_MUL OP_SWAP OP_SUB OP_9 OP_ROLL 1d OP_PICK OP_SUB OP_9 OP_ROLL 1c OP_PICK OP_SUB OP_SWAP 1d OP_PICK OP_SUB OP_SWAP 1c OP_PICK OP_SUB 1e OP_PICK OP_5 OP_ROLL OP_6 OP_ROLL 20 OP_PICK OP_DUP OP_3 OP_PICK OP_MUL OP_2 OP_PICK OP_5 OP_PICK OP_MUL OP_ADD OP_SWAP OP_ROT OP_MUL OP_3 OP_ROLL OP_3 OP_ROLL OP_MUL OP_SWAP OP_SUB OP_3 OP_PICK OP_3 OP_PICK OP_DUP OP_2 OP_PICK OP_SUB OP_2 OP_PICK OP_2 OP_PICK OP_ADD OP_2 OP_4 OP_ROLL OP_4 OP_ROLL OP_MUL OP_MUL OP_SWAP OP_ROT OP_MUL OP_SWAP OP_7 OP_PICK OP_SUB OP_SWAP OP_6 OP_PICK OP_SUB OP_SWAP OP_3 OP_PICK OP_SUB OP_SWAP OP_2 OP_PICK OP_SUB OP_SWAP OP_3 OP_PICK OP_SUB OP_SWAP OP_2 OP_PICK OP_SUB 1d OP_PICK OP_12 OP_ROLL OP_ADD 1c OP_PICK OP_12 OP_ROLL OP_ADD OP_DUP OP_2 OP_PICK OP_SUB OP_2 OP_PICK OP_2 OP_PICK OP_ADD OP_2 OP_4 OP_ROLL OP_4 OP_ROLL OP_MUL OP_MUL OP_SWAP OP_ROT OP_MUL OP_SWAP 1b OP_PICK OP_SUB OP_SWAP 1a OP_PICK OP_SUB OP_SWAP OP_11 OP_ROLL OP_SUB OP_SWAP OP_10 OP_ROLL OP_SUB OP_5 OP_ROLL OP_4 OP_PICK OP_SUB OP_5 OP_ROLL OP_4 OP_PICK OP_SUB OP_6 OP_PICK OP_8 OP_PICK OP_3 OP_ROLL OP_DUP OP_3 OP_PICK OP_MUL OP_2 OP_PICK OP_5 OP_PICK OP_MUL OP_ADD OP_SWAP OP_ROT OP_MUL OP_3 OP_ROLL OP_3 OP_ROLL OP_MUL OP_SWAP OP_SUB 1c OP_PICK OP_9 OP_ROLL OP_10 OP_ROLL 1e OP_PICK OP_DUP OP_3 OP_PICK OP_MUL OP_2 OP_PICK OP_5 OP_PICK OP_MUL OP_ADD OP_SWAP OP_ROT OP_MUL OP_3 OP_ROLL OP_3 OP_ROLL OP_MUL OP_SWAP OP_SUB OP_OVER OP_ROT OP_ADD OP_OVER OP_ROT OP_ADD OP_3 OP_ROLL OP_ROT OP_SUB OP_ROT OP_ROT OP_SUB OP_3 OP_PICK OP_3 OP_PICK OP_DUP OP_2 OP_PICK OP_SUB OP_2 OP_PICK OP_2 OP_PICK OP_ADD OP_2 OP_4 OP_ROLL OP_4 OP_ROLL OP_MUL OP_MUL OP_SWAP OP_ROT OP_MUL 15 OP_PICK OP_6 OP_PICK OP_ADD 15 OP_PICK OP_6 OP_PICK OP_ADD OP_DUP OP_2 OP_PICK OP_SUB OP_2 OP_PICK OP_2 OP_PICK OP_ADD OP_2 OP_4 OP_ROLL OP_4 OP_ROLL OP_MUL OP_MUL OP_SWAP OP_ROT OP_MUL OP_SWAP OP_13 OP_PICK OP_SUB OP_SWAP OP_12 OP_PICK OP_SUB OP_SWAP OP_3 OP_PICK OP_SUB OP_SWAP OP_2 OP_PICK OP_SUB OP_11 OP_PICK 19 OP_PICK OP_MUL 1a OP_PICK OP_12 OP_PICK OP_MUL OP_ADD OP_11 OP_PICK 1a OP_PICK OP_MUL OP_13 OP_PICK 1c OP_PICK OP_MUL OP_SUB OP_OVER OP_ROT OP_ADD OP_OVER OP_ROT OP_ADD OP_SWAP OP_3 OP_ROLL OP_SUB OP_SWAP OP_ROT OP_SUB OP_7 OP_PICK 11 OP_PICK OP_MUL OP_7 OP_PICK 12 OP_PICK OP_MUL OP_OVER OP_ROT OP_ADD OP_OVER OP_ROT OP_ADD OP_0 OP_14 OP_ROLL OP_SUB OP_0 OP_14 OP_ROLL OP_SUB OP_SWAP 13 OP_PICK OP_MUL OP_SWAP 13 OP_PICK OP_MUL OP_OVER OP_ROT OP_ADD OP_OVER OP_ROT OP_ADD OP_5 OP_ROLL OP_5 OP_ROLL OP_3 OP_ROLL OP_3 OP_ROLL OP_5 OP_ROLL OP_5 OP_ROLL OP_13 OP_ROLL OP_13 OP_ROLL OP_11 OP_ROLL OP_11 OP_ROLL OP_13 OP_ROLL OP_13 OP_ROLL OP_13 OP_ROLL OP_13 OP_ROLL
+        }
+    }
+
+    static function OLDlineFuncAdd(TwistPoint r, TwistPoint p, CurvePoint q, FQ2 r2) : LineFuncRes {
         // See the mixed addition algorithm from "Faster Computation of the
         // Tate Pairing", http://arxiv.org/pdf/0904.0854v3.pdf
 
@@ -77,6 +94,12 @@ library BN256Pairing {
     }
 
     static function lineFuncDouble(TwistPoint r, CurvePoint q) : LineFuncRes {
+        asm {
+OP_11 OP_PICK OP_11 OP_PICK OP_DUP OP_2 OP_PICK OP_SUB OP_2 OP_PICK OP_2 OP_PICK OP_ADD OP_2 OP_4 OP_ROLL OP_4 OP_ROLL OP_MUL OP_MUL OP_SWAP OP_ROT OP_MUL OP_11 OP_PICK OP_11 OP_PICK OP_DUP OP_2 OP_PICK OP_SUB OP_2 OP_PICK OP_2 OP_PICK OP_ADD OP_2 OP_4 OP_ROLL OP_4 OP_ROLL OP_MUL OP_MUL OP_SWAP OP_ROT OP_MUL OP_2DUP OP_DUP OP_2 OP_PICK OP_SUB OP_2 OP_PICK OP_2 OP_PICK OP_ADD OP_2 OP_4 OP_ROLL OP_4 OP_ROLL OP_MUL OP_MUL OP_SWAP OP_ROT OP_MUL 11 OP_PICK OP_4 OP_PICK OP_ADD 11 OP_PICK OP_4 OP_PICK OP_ADD OP_DUP OP_2 OP_PICK OP_SUB OP_2 OP_PICK OP_2 OP_PICK OP_ADD OP_2 OP_4 OP_ROLL OP_4 OP_ROLL OP_MUL OP_MUL OP_SWAP OP_ROT OP_MUL OP_SWAP OP_7 OP_PICK OP_SUB OP_SWAP OP_6 OP_PICK OP_SUB OP_SWAP OP_3 OP_PICK OP_SUB OP_SWAP OP_2 OP_PICK OP_SUB OP_OVER OP_ROT OP_ADD OP_OVER OP_ROT OP_ADD OP_7 OP_PICK OP_8 OP_PICK OP_ADD OP_7 OP_PICK OP_8 OP_PICK OP_ADD OP_SWAP OP_9 OP_PICK OP_ADD OP_SWAP OP_8 OP_PICK OP_ADD OP_2DUP OP_DUP OP_2 OP_PICK OP_SUB OP_2 OP_PICK OP_2 OP_PICK OP_ADD OP_2 OP_4 OP_ROLL OP_4 OP_ROLL OP_MUL OP_MUL OP_SWAP OP_ROT OP_MUL OP_OVER OP_6 OP_PICK OP_SUB OP_OVER OP_6 OP_PICK OP_SUB OP_SWAP OP_7 OP_PICK OP_SUB OP_SWAP OP_6 OP_PICK OP_SUB 17 OP_PICK 16 OP_PICK OP_ADD 17 OP_PICK 16 OP_PICK OP_ADD OP_DUP OP_2 OP_PICK OP_SUB OP_2 OP_PICK OP_2 OP_PICK OP_ADD OP_2 OP_4 OP_ROLL OP_4 OP_ROLL OP_MUL OP_MUL OP_SWAP OP_ROT OP_MUL OP_SWAP OP_13 OP_PICK OP_SUB OP_SWAP OP_12 OP_PICK OP_SUB OP_SWAP 15 OP_PICK OP_SUB OP_SWAP 14 OP_PICK OP_SUB OP_9 OP_ROLL OP_4 OP_PICK OP_SUB OP_9 OP_ROLL OP_4 OP_PICK OP_SUB OP_8 OP_PICK OP_10 OP_PICK OP_3 OP_ROLL OP_DUP OP_3 OP_PICK OP_MUL OP_2 OP_PICK OP_5 OP_PICK OP_MUL OP_ADD OP_SWAP OP_ROT OP_MUL OP_3 OP_ROLL OP_3 OP_ROLL OP_MUL OP_SWAP OP_SUB OP_11 OP_PICK OP_12 OP_ROLL OP_ADD OP_11 OP_PICK OP_12 OP_ROLL OP_ADD OP_OVER OP_ROT OP_ADD OP_OVER OP_ROT OP_ADD OP_OVER OP_ROT OP_ADD OP_OVER OP_ROT OP_ADD OP_3 OP_ROLL OP_ROT OP_SUB OP_ROT OP_ROT OP_SUB OP_3 OP_PICK OP_3 OP_PICK OP_DUP OP_2 OP_PICK OP_SUB OP_2 OP_PICK OP_2 OP_PICK OP_ADD OP_2 OP_4 OP_ROLL OP_4 OP_ROLL OP_MUL OP_MUL OP_SWAP OP_ROT OP_MUL OP_10 OP_PICK 15 OP_PICK 17 OP_PICK OP_14 OP_PICK OP_DUP OP_3 OP_PICK OP_MUL OP_2 OP_PICK OP_5 OP_PICK OP_MUL OP_ADD OP_SWAP OP_ROT OP_MUL OP_3 OP_ROLL OP_3 OP_ROLL OP_MUL OP_SWAP OP_SUB OP_OVER OP_ROT OP_ADD OP_OVER OP_ROT OP_ADD OP_0 OP_ROT OP_SUB OP_0 OP_ROT OP_SUB OP_SWAP 15 OP_PICK OP_MUL OP_SWAP 15 OP_PICK OP_MUL 1d OP_PICK OP_14 OP_ROLL OP_ADD 1c OP_PICK OP_14 OP_ROLL OP_ADD OP_DUP OP_2 OP_PICK OP_SUB OP_2 OP_PICK OP_2 OP_PICK OP_ADD OP_2 OP_4 OP_ROLL OP_4 OP_ROLL OP_MUL OP_MUL OP_SWAP OP_ROT OP_MUL OP_SWAP 11 OP_ROLL OP_SUB OP_SWAP OP_16 OP_ROLL OP_SUB OP_SWAP OP_13 OP_ROLL OP_SUB OP_SWAP OP_12 OP_ROLL OP_SUB OP_13 OP_PICK OP_14 OP_ROLL OP_ADD OP_13 OP_PICK OP_14 OP_ROLL OP_ADD OP_OVER OP_ROT OP_ADD OP_OVER OP_ROT OP_ADD OP_3 OP_ROLL OP_ROT OP_SUB OP_ROT OP_ROT OP_SUB OP_9 OP_PICK 11 OP_PICK OP_MUL 12 OP_PICK OP_10 OP_PICK OP_MUL OP_ADD OP_9 OP_PICK 12 OP_PICK OP_MUL OP_11 OP_PICK 14 OP_PICK OP_MUL OP_SUB OP_OVER OP_ROT OP_ADD OP_OVER OP_ROT OP_ADD OP_SWAP OP_16 OP_PICK OP_MUL OP_SWAP OP_16 OP_PICK OP_MUL OP_3 OP_ROLL OP_3 OP_ROLL OP_5 OP_ROLL OP_5 OP_ROLL OP_5 OP_ROLL OP_5 OP_ROLL OP_13 OP_ROLL OP_13 OP_ROLL OP_11 OP_ROLL OP_11 OP_ROLL OP_13 OP_ROLL OP_13 OP_ROLL OP_13 OP_ROLL OP_13 OP_ROLL
+        }
+    }
+
+    static function OLDlineFuncDouble(TwistPoint r, CurvePoint q) : LineFuncRes {
         // See the doubling algorithm for a=0 from "Faster Computation of the
         // Tate Pairing", http://arxiv.org/pdf/0904.0854v3.pdf
 
@@ -137,6 +160,12 @@ library BN256Pairing {
     }
 
     static function mulLine(FQ12 ret, FQ2 a, FQ2 b, FQ2 c) : FQ12 {
+        asm {
+OP_3 OP_PICK 11 OP_PICK OP_MUL 12 OP_PICK OP_4 OP_PICK OP_MUL OP_ADD OP_3 OP_PICK 12 OP_PICK OP_MUL OP_5 OP_PICK 14 OP_PICK OP_MUL OP_SUB OP_7 OP_PICK 11 OP_PICK OP_MUL 12 OP_PICK OP_8 OP_PICK OP_MUL OP_ADD OP_7 OP_PICK 12 OP_PICK OP_MUL OP_9 OP_PICK 14 OP_PICK OP_MUL OP_SUB OP_3 OP_ROLL OP_ROT OP_ADD OP_ROT OP_ROT OP_ADD OP_4 OP_PICK 11 OP_PICK 13 OP_PICK OP_8 OP_PICK OP_DUP OP_3 OP_PICK OP_MUL OP_2 OP_PICK OP_5 OP_PICK OP_MUL OP_ADD OP_SWAP OP_ROT OP_MUL OP_3 OP_ROLL OP_3 OP_ROLL OP_MUL OP_SWAP OP_SUB OP_9 OP_PICK 11 OP_PICK OP_MUL 12 OP_PICK OP_10 OP_PICK OP_MUL OP_ADD OP_9 OP_PICK 12 OP_PICK OP_MUL OP_11 OP_PICK 14 OP_PICK OP_MUL OP_SUB OP_3 OP_ROLL OP_ROT OP_ADD OP_ROT OP_ROT OP_ADD OP_6 OP_PICK 11 OP_PICK 13 OP_PICK OP_10 OP_PICK OP_DUP OP_3 OP_PICK OP_MUL OP_2 OP_PICK OP_5 OP_PICK OP_MUL OP_ADD OP_SWAP OP_ROT OP_MUL OP_3 OP_ROLL OP_3 OP_ROLL OP_MUL OP_SWAP OP_SUB OP_10 OP_PICK 17 OP_PICK 19 OP_PICK OP_14 OP_PICK OP_DUP OP_3 OP_PICK OP_MUL OP_2 OP_PICK OP_5 OP_PICK OP_MUL OP_ADD OP_SWAP OP_ROT OP_MUL OP_3 OP_ROLL OP_3 OP_ROLL OP_MUL OP_SWAP OP_SUB OP_OVER OP_9 OP_MUL OP_OVER OP_ADD OP_9 OP_ROT OP_MUL OP_ROT OP_SUB OP_3 OP_ROLL OP_ROT OP_ADD OP_ROT OP_ROT OP_ADD 11 OP_PICK OP_7 OP_PICK OP_MUL OP_8 OP_PICK 12 OP_PICK OP_MUL OP_ADD 11 OP_PICK OP_8 OP_PICK OP_MUL 13 OP_PICK OP_10 OP_PICK OP_MUL OP_SUB 11 OP_PICK OP_9 OP_PICK OP_MUL OP_10 OP_PICK 12 OP_PICK OP_MUL OP_ADD 11 OP_PICK OP_10 OP_PICK OP_MUL 13 OP_PICK OP_12 OP_PICK OP_MUL OP_SUB 11 OP_PICK OP_11 OP_PICK OP_MUL OP_12 OP_PICK 12 OP_PICK OP_MUL OP_ADD 11 OP_PICK OP_12 OP_PICK OP_MUL 13 OP_PICK OP_14 OP_PICK OP_MUL OP_SUB OP_15 OP_PICK OP_14 OP_PICK OP_ADD OP_15 OP_PICK OP_14 OP_PICK OP_ADD 1f OP_PICK 1a OP_PICK OP_ADD 1f OP_PICK 1a OP_PICK OP_ADD 1f OP_PICK 1a OP_PICK OP_ADD 1f OP_PICK 1a OP_PICK OP_ADD 1f OP_PICK 1a OP_PICK OP_ADD 1f OP_PICK 1a OP_PICK OP_ADD OP_7 OP_PICK OP_5 OP_PICK OP_MUL OP_6 OP_PICK OP_8 OP_PICK OP_MUL OP_ADD OP_7 OP_PICK OP_6 OP_PICK OP_MUL OP_9 OP_PICK OP_8 OP_PICK OP_MUL OP_SUB 1b OP_PICK OP_5 OP_PICK OP_MUL OP_6 OP_PICK 1c OP_PICK OP_MUL OP_ADD 1b OP_PICK OP_6 OP_PICK OP_MUL 1d OP_PICK OP_8 OP_PICK OP_MUL OP_SUB OP_3 OP_ROLL OP_ROT OP_ADD OP_ROT OP_ROT OP_ADD OP_8 OP_PICK OP_5 OP_ROLL OP_6 OP_ROLL OP_10 OP_PICK OP_DUP OP_3 OP_PICK OP_MUL OP_2 OP_PICK OP_5 OP_PICK OP_MUL OP_ADD OP_SWAP OP_ROT OP_MUL OP_3 OP_ROLL OP_3 OP_ROLL OP_MUL OP_SWAP OP_SUB 1b OP_PICK OP_5 OP_PICK OP_MUL OP_6 OP_PICK 1c OP_PICK OP_MUL OP_ADD 1b OP_PICK OP_6 OP_PICK OP_MUL 1d OP_PICK OP_8 OP_PICK OP_MUL OP_SUB OP_3 OP_ROLL OP_ROT OP_ADD OP_ROT OP_ROT OP_ADD OP_8 OP_ROLL OP_5 OP_ROLL OP_6 OP_ROLL OP_9 OP_ROLL OP_DUP OP_3 OP_PICK OP_MUL OP_2 OP_PICK OP_5 OP_PICK OP_MUL OP_ADD OP_SWAP OP_ROT OP_MUL OP_3 OP_ROLL OP_3 OP_ROLL OP_MUL OP_SWAP OP_SUB 18 OP_PICK OP_7 OP_ROLL OP_8 OP_ROLL 1a OP_PICK OP_DUP OP_3 OP_PICK OP_MUL OP_2 OP_PICK OP_5 OP_PICK OP_MUL OP_ADD OP_SWAP OP_ROT OP_MUL OP_3 OP_ROLL OP_3 OP_ROLL OP_MUL OP_SWAP OP_SUB OP_OVER OP_9 OP_MUL OP_OVER OP_ADD OP_9 OP_ROT OP_MUL OP_ROT OP_SUB OP_3 OP_ROLL OP_ROT OP_ADD OP_ROT OP_ROT OP_ADD OP_5 OP_ROLL 11 OP_PICK OP_SUB OP_5 OP_ROLL OP_16 OP_PICK OP_SUB OP_5 OP_ROLL OP_15 OP_PICK OP_SUB OP_5 OP_ROLL OP_14 OP_PICK OP_SUB OP_5 OP_ROLL OP_13 OP_PICK OP_SUB OP_5 OP_ROLL OP_12 OP_PICK OP_SUB OP_5 OP_ROLL OP_11 OP_PICK OP_SUB OP_5 OP_ROLL OP_10 OP_PICK OP_SUB OP_5 OP_ROLL OP_9 OP_PICK OP_SUB OP_5 OP_ROLL OP_8 OP_PICK OP_SUB OP_5 OP_ROLL OP_7 OP_PICK OP_SUB OP_5 OP_ROLL OP_6 OP_PICK OP_SUB OP_15 OP_ROLL OP_15 OP_ROLL OP_15 OP_ROLL OP_15 OP_ROLL 11 OP_ROLL 11 OP_ROLL OP_OVER OP_9 OP_MUL OP_OVER OP_ADD OP_9 OP_ROT OP_MUL OP_ROT OP_SUB 11 OP_ROLL OP_6 OP_ROLL OP_ADD OP_16 OP_ROLL OP_6 OP_ROLL OP_ADD OP_15 OP_ROLL OP_6 OP_ROLL OP_ADD OP_14 OP_ROLL OP_6 OP_ROLL OP_ADD OP_13 OP_ROLL OP_6 OP_ROLL OP_ADD OP_12 OP_ROLL OP_6 OP_ROLL OP_ADD
+        }
+    }
+
+    static function OLDmulLine(FQ12 ret, FQ2 a, FQ2 b, FQ2 c) : FQ12 {
         FQ6 a2 = {BN256.FQ2Zero, a, b};
         a2 = BN256.mulFQ6(a2, ret.x);
         FQ6 t3 = BN256.mulScalarFQ6(ret.y, c);
@@ -185,6 +214,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 0
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -199,6 +230,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 0
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -209,6 +242,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- -1
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -223,6 +258,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 1
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -241,6 +278,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 0
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -251,6 +290,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 0
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -265,6 +306,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 0
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -275,6 +318,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 1
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -293,6 +338,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 0
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -303,6 +350,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- -1
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -317,6 +366,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 0
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -327,6 +378,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 0
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -337,6 +390,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 1
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -351,6 +406,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 0
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -365,6 +422,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 0
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -375,6 +434,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 1
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -393,6 +454,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 1
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -407,6 +470,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 0
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -417,6 +482,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 0
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -431,6 +498,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 0
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -445,6 +514,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 0
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -455,6 +526,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- -1
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -469,6 +542,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 1
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -487,6 +562,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 0
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -497,6 +574,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 1
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -511,6 +590,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 0
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -525,6 +606,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 1
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -539,6 +622,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 0
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -553,6 +638,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 0
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -567,6 +654,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 0
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -581,6 +670,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 0
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -591,6 +682,8 @@ library BN256Pairing {
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
         r = lfr.rOut;
         //---- 0
+        r = BN256.modTwistPoint(r);
+        ret = BN256.modFQ12(ret);
         lfr = lineFuncDouble(r, bAffine);
         ret = BN256.squareFQ12(ret);
         ret = mulLine(ret, lfr.a, lfr.b, lfr.c);
@@ -638,7 +731,7 @@ library BN256Pairing {
 
         r2 = BN256.squareFQ2(minusQ2.y);
         lfr = lineFuncAdd(r, minusQ2, bAffine, r2);
-        return mulLine(ret, lfr.a, lfr.b, lfr.c);
+        return BN256.modFQ12(mulLine(ret, lfr.a, lfr.b, lfr.c));
     }
 
     static function finalExponentiation(FQ12 in) : FQ12 {
@@ -656,6 +749,9 @@ library BN256Pairing {
         FQ12 fp = BN256.frobeniusFQ12(t1);
         FQ12 fp2 = BN256.frobeniusP2FQ12(t1);
         FQ12 fp3 = BN256.frobeniusFQ12(fp2);
+        fp = BN256.modFQ12(fp);
+        fp2 = BN256.modFQ12(fp2);
+        fp3 = BN256.modFQ12(fp3);
 
         FQ12 fu = BN256.expFQ12_u(t1);
         FQ12 fu2 = BN256.expFQ12_u(fu);
@@ -679,6 +775,7 @@ library BN256Pairing {
         y6 = BN256.conjugateFQ12(y6);
 
         FQ12 t0 = BN256.squareFQ12(y6);
+        t0 = BN256.modFQ12(t0);
         t0 = BN256.mulFQ12(t0, y4);
         t0 = BN256.mulFQ12(t0, y5);
         t1 = BN256.mulFQ12(y3, y5);
@@ -691,6 +788,7 @@ library BN256Pairing {
         t1 = BN256.mulFQ12(t1, y0);
         t0 = BN256.squareFQ12(t0);
         t0 = BN256.mulFQ12(t0, t1);
+        t0 = BN256.modFQ12(t0);
 
         return t0;
     }
@@ -729,14 +827,18 @@ library BN256Pairing {
         if (!BN256.isInfCurvePoint(a0) && !BN256.isInfTwistPoint(b0)) {
             acc = BN256.mulFQ12(acc, miller(b0, a0));
         }
+        acc = BN256.modFQ12(acc);
         if (!BN256.isInfCurvePoint(a2) && !BN256.isInfTwistPoint(b2)) {
             acc = BN256.mulFQ12(acc, miller(b2, a2));
         }
+        acc = BN256.modFQ12(acc);
         if (!BN256.isInfCurvePoint(a3) && !BN256.isInfTwistPoint(b3)) {
             acc = BN256.mulFQ12(acc, miller(b3, a3));
         }
+        acc = BN256.modFQ12(acc);
 
         acc = finalExponentiation(acc);
+        acc = BN256.modFQ12(acc);
 
         return acc == BN256.FQ12One;
     }
@@ -788,3 +890,4 @@ library BN256Pairing {
     }
 
 }
+ 
