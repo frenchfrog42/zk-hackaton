@@ -32,7 +32,7 @@ contract TestEverything {
     }
 
     public function testAddCurvePoints(CurvePoint a, CurvePoint b) {
-        require(BN256.modCurvePoint(BN256.OLDaddCurvePoints(a, b)) == BN256.modCurvePoint(BN256.addCurvePoints(a, b)));
+        require(BN256.modCurvePoint(BN256.OLDaddCurvePoints(a, b)) == BN256.modCurvePoint(BN256.addCurvePoints(BN256.P, a, b)));
     }
 
     /* BN256Pairing */
