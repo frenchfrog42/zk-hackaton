@@ -158,9 +158,37 @@ def test_doubleCurvePoint():
     a = create_CurvePoint([random.randint(0, 2**256-1) for _ in range(4)])
     assert bn256_curve_test.testDoubleCurvePoint(a).verify()
 
+# General case, is false for every if encountered in the scrypt code
+# As you can see with the next 3 functions, it's ok to take random points for this function
+# (Most random points will make each if go to the else condition)
 def test_addCurvePoints():
     a = create_CurvePoint([random.randint(0, 2**256-1) for _ in range(4)])
     b = create_CurvePoint([random.randint(0, 2**256-1) for _ in range(4)])
+    assert bn256_curve_test.testAddCurvePoints(a, b).verify()
+
+# a.z == 0
+def test_addCurvePoints_firstbranch():
+    a = create_CurvePoint([random.randint(0, 2**256-1) for _ in range(2)] + [0] + [random.randint(0, 2**256-1)])
+    b = create_CurvePoint([random.randint(0, 2**256-1) for _ in range(4)])
+    assert bn256_curve_test.testAddCurvePoints(a, b).verify()
+
+# b.z == 0
+def test_addCurvePoints_secondbranch():
+    a = create_CurvePoint([random.randint(0, 2**256-1) for _ in range(4)])
+    b = create_CurvePoint([random.randint(0, 2**256-1) for _ in range(2)] + [0] + [random.randint(0, 2**256-1)])
+    assert bn256_curve_test.testAddCurvePoints(a, b).verify()
+
+# bothEqual == true
+def test_addCurvePoints_thirdbranch():
+    # xEqual means z*z*x is the same for both value
+    # yValue means b.y*a.z*a.z*a.z is the same as a.y*b.z*b.z*b.z
+    # To simplify for the first condition we'll take a.z = b.z, and a.x = b.x
+    # This implies that a.y = b.y for the 2nd condition to be true
+    # This may sound like a simplification, we could have bothEqual && not (a.z == b.z && a.x == b.x)
+    # But, when bothEqual==true, the result returned is doubleCurvePoint which we already test elsewhere
+    args = [random.randint(0, 2**256-1) for _ in range(4)]
+    a = create_CurvePoint(args)
+    b = create_CurvePoint(args[:3] + [random.randint(0, 2**256-1)])
     assert bn256_curve_test.testAddCurvePoints(a, b).verify()
 
 def test_lineFuncAdd():
@@ -194,6 +222,12 @@ for _ in range(n_test):
 print("Test double ok")
 for _ in range(n_test):
     test_addCurvePoints()
+# These tests are less interesting than the others
+# So we make them less numerous
+for _ in range(max(2, n_test//10)):
+    test_addCurvePoints_firstbranch()
+    test_addCurvePoints_secondbranch()
+    test_addCurvePoints_thirdbranch()
 print("Test add ok")
 for _ in range(n_test):
     test_lineFuncAdd()
