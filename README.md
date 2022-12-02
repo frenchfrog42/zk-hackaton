@@ -33,7 +33,7 @@ Here is the indicative size[1] I saved for each functions:
 | mulFQ12          | 1038     | 11373    | 90.87%        |
 | squareFQ12       | 763      | 8459     | 90.98%        |
 | doubleCurvePoint | 92       | 648      | 85.8%         |
-| addCurvePoints   | 327      | 1409     | 76.79%        |
+| addCurvePoints   | 340      | 1409     | 75.87%        |
 | lineFuncAdd      | 548      | 4971     | 88.98%        |
 | lineFuncDouble   | 484      | 4525     | 89.3%         |
 | mulLine          | 580      | 8799     | 93.41%        |
