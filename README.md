@@ -33,6 +33,22 @@ And the indicative size[1] I saved for each functions:
 | lineFuncDouble   | 484      | 4525     | 89.3%         |
 | mulLine          | 580      | 8799     | 93.41%        |
 
+You can find my implems in the following racket files:
+
+In line.rkt you have:
++ `(contract->opcodes contract-linefuncadd)`
++ `(contract->opcodes contract-linefuncdouble)`
+
+In curve.rkt you have:
++ `(contract->opcodes contract-doubleCurvePoint)`
++ `(contract->opcodes contract-addCurvePoint)`
+
+In fq12.rkt you have:
++ `(contract->opcodes contract-mulFQ12)`
++ `(contract->opcodes contract-squareFQ12)`
++ `(contract->opcodes contract-mulLine)`
+
+
 I rewrote it in Baguette because it's more low level and you have more control.  
 For instance you don't have to copy every arguments on top of the stack each time you make a function call. Here is an example, the first function does not copy arguments to the top of the stack, but the 2nd function does https://gist.github.com/frenchfrog42/576e0b54f73148dfe965ab935c9c261c  
 Another difference, that gives a lot of improvement here, is the fact that Baguette modify the order of variable in the stack when you modify a variable. So modifying a variable has always a fixed cost, and this variable will be at the top of the stack after the modification.
