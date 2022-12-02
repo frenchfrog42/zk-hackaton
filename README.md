@@ -1,6 +1,6 @@
 # My submission to the ZK bsv hackaton
 
-Compiled testZKSNARK.scrypt successfully, [1270054 bytes]  
+Compiled testZKSNARK.scrypt successfully, [1383468 bytes]  
 (Instead of 5MB! Use my files to save lot of fees for your users).
 
 If you want to use my code, just replace your `bn256.scrypt` and `bn256pairing.scrypt` files with my files and enjoy the lower size (and faster compilation time) of your contract.
