@@ -6,7 +6,7 @@ from scryptlib import (
         compile_contract, build_contract_class, build_type_classes
         )
 
-n_test = 1000
+n_test = 10
 
 """Smart contract to test
 import "bn256.scrypt";
