@@ -1,5 +1,6 @@
 {
     "version": 9,
+    "asm": "",
     "compilerVersion": "",
     "contract": "ZKSNARKTest",
     "md5": "",
