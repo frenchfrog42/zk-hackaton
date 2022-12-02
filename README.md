@@ -1,4 +1,4 @@
-# Todo
+# My submission to the ZK bsv hackaton
 
 Compiled testZKSNARK.scrypt successfully, [1377903 bytes]
 
@@ -107,6 +107,6 @@ If you want to run the tests:
 Here is a repl: https://replit.com/@frenchfrog42/zk-hackaton  
 Now, type either `pip install scryptlib; python3 test_ZKSNARK.py` or `pip install scryptlib; python3 test_subfunctions.py` to run the tests.
 
-If you want to run the racket code:
+If you want to run the racket code:  
 Here is a repl: https://replit.com/@frenchfrog42/bsv-hackaton
 Now, type for instance `cd Baguette; racket bn256/line.rkt`.
