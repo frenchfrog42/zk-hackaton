@@ -7,7 +7,7 @@ If you want to use my code, just replace your `bn256.scrypt` and `bn256pairing.s
 
 ## Contribution
 
-I optimized the following functions, so that the resulting scriptcode is a lot smaller and the fees cheaper for the end users. The diff between my code and the original code can be read here: https://github.com/frenchfrog42/zk-hackaton/commit/4e8deff409832e641362289719b9332a6cb0e4e5
+I optimized the following functions, so that the resulting scriptcode is a lot smaller and the fees cheaper for the end users.
 
 Here is the list of functions I optimized:
 
