@@ -80,3 +80,11 @@ Install racket: `sudo apt-get install racket`
 If you want a good dev experience, install the racket vscode extension as described in https://github.com/frenchfrog42/Baguette  
 Modify and run the file you want, for instance: `racket bn256/line.rkt`  
 Copy and paste the result in your scrypt function, and compile your scrypt code :)
+
+## Want to test without installing everything?
+
+Here is my repl: https://replit.com/@frenchfrog42/zk-hackaton  
+Now, type either `pip install scryptlib; python3 test_ZKSNARK.py` or `pip install scryptlib; python3 test_subfunctions.py` to run the tests.
+
+Or, create a new repl:
+[![Run on Repl.it](https://replit.com/badge/github/frenchfrog42/zk-hackaton)](https://replit.com/new/github/frenchfrog42/zk-hackaton)
