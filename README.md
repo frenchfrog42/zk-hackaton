@@ -1,7 +1,7 @@
 # My submission to the ZK bsv hackaton
 
-Compiled testZKSNARK.scrypt successfully, [1377903 bytes]  
-(Instead of 5MB with release! Use my files to save 3.3MB of fees).
+Compiled testZKSNARK.scrypt successfully, [1270054 bytes]  
+(Instead of 5MB! Use my files to save lot of fees for your users).
 
 ## Contribution
 
