@@ -3,7 +3,6 @@
 (require "../compilation.rkt")
 (require "../util.rkt")
 
-;; check if we need to do modulus at the end
 ;; 92
 (define (doubleCurvePoint) `(
     (define A (* ax ax))
@@ -41,8 +40,10 @@
     (doubleCurvePoint)
 ))
 
-;; 327
+;; 340
 (define (addCurvePoint) `(
+    (define az (% (destroy az) P))
+    (define bz (% (destroy bz) P))
     (define z12 (* az az))
     (define z22 (* bz bz))
 
@@ -56,14 +57,14 @@
     (define s2 (* by t))
 
     (define h (- (destroy u2) u1))
-    (define xEqual (= 0 h))
+    (define xEqual (= 0 (% h P)))
 
     (modify t (* 2 h))
     (define i (* t t))
     (define j (* h i))
 
     (modify t (- (destroy s2) s1))
-    (define yEqual (= 0 t))
+    (define yEqual (= 0 (% t P)))
     (define bothEqual (and (destroy xEqual) (destroy yEqual)))
 
     (define r (+ t t))
@@ -121,7 +122,7 @@
             '((drop myresy))
             '((drop myresx))
             '(debug)
-            `((ignore-execute ,(lambda () (set-stack '(bothEqual bt bz by bx _at _az _ay _ax)))))
+            `((ignore-execute ,(lambda () (set-stack '(bothEqual bt _az bz by bx _at _ay _ax P)))))
             '(debug)
             '((define ax _ax))
             '((define ay _ay))
@@ -139,13 +140,14 @@
 
 (define contract-addCurvePoint (append
     '(public)
-    '((ax ay az at bx by bz bt))
+    '((P ax ay az at bx by bz bt))
     (addCurvePoint)
 ))
 
 ; (contract->opcodes contract-doubleCurvePoint)
 (contract->opcodes contract-addCurvePoint)
 
+(provide (all-defined-out))
 
 
 
