@@ -5,6 +5,9 @@ Compiled testZKSNARK.scrypt successfully, [1383468 bytes]
 
 If you want to use my code, just replace your `bn256.scrypt` and `bn256pairing.scrypt` files with my files and enjoy the lower size (and faster compilation time) of your contract.
 
+[EDIT]: I tried my lib on one of the submission of the hackaton, zk-minesweeper, and it indeed reduces the size of the contract, from (when compiled with release) 7 575 932 Bytes, to 1 954 015 Bytes, by replacing the single file "verifier.scrypt" (which is the concatenation of `bn256.scrypt`, `bn256pairing.scrypt`, and 15lines at the bottom).  
+Check out the diff here: https://github.com/frenchfrog42/zk-minesweeper/commit/e4d963fbf30199e96e291a50bad8589ef21b01aa
+
 ## First, some background
 
 I'm adding this paragraph (and doing some fixes to the readme, no other files are modified) based on feedback I got. If you wish to see the original README please click here https://github.com/frenchfrog42/zk-hackaton/blob/7b322a24e43e9f5f1cd891ed7dce1e973309a652/README.md
